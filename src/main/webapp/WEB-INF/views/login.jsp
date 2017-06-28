@@ -24,6 +24,7 @@
                 <td><input type="submit" value="Submit" /></td>
             </tr>
         </table>
+        <a href="/reg">Not registered?</a>
         <div style="color: red">${error}</div>
     </div>
 </form:form>
