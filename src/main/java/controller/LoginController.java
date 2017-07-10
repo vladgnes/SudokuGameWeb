@@ -18,14 +18,14 @@ public class LoginController {
                          @RequestParam String password) {
         if (username != null && password != null) {
             if (new ManageUser().login(username, password)!= null) {
-                model.addAttribute("msg", "welcome" + username);
+                model.addAttribute("msg", false);
                 return "success";
             } else {
-                model.addAttribute("error", "Invalid Details");
+                model.addAttribute("msg", true);
                 return "login";
             }
         } else {
-            model.addAttribute("error", "Please enter Details");
+            model.addAttribute("msg", true);
             return "login";
         }
     }
