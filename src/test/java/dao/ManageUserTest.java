@@ -12,7 +12,7 @@ public class ManageUserTest {
 
     @Test
     public void manageUserRegistryTet(){
-        assertEquals(false, new ManageUser().registry("Vlad","Hnes"));
+        assertEquals(false, new ManageUser().registry("Vlad","Hnes", "Vlad"));
     }
 
 }
