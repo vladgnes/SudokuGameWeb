@@ -15,7 +15,6 @@ public class ManageUser {
     private Session session;
 
     public ManageUser() {this.session = HibernateUtil.getSessionFactory().openSession();}
-    //private Logger logger = Logger.getLogger(ManageUser.class);
 
     public User login(String username, String password) {
         try {
@@ -30,10 +29,12 @@ public class ManageUser {
         }
     }
 
-    private boolean ifUserExists(String username) {
-        String selectUserRequest = "FROM User AS User WHERE User.username =:username";
+    private boolean ifUserExists(String username, String email) {
+        String selectUserRequest = "FROM User AS User WHERE User.username =:username" +
+                " OR User.email =:email";
         Query query = session.createQuery(selectUserRequest);
         query.setParameter("username", username);
+        query.setParameter("email", email);
         try {
             User user = (User) query.getSingleResult();
         } catch (NoResultException e) {
@@ -46,13 +47,14 @@ public class ManageUser {
         return true;
     }
 
-    public boolean registry(String username, String password) {
-        if(!ifUserExists(username))
+    public boolean registry(String username, String password, String email) {
+        if(!ifUserExists(username, email))
         {
             Transaction txn = session.beginTransaction();
             User user = new User();
             user.setUsername(username);
             user.setPassword(password);
+            user.setEmail(email);
             session.save(user);
             txn.commit();
             session.close();

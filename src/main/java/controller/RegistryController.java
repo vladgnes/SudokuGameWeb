@@ -16,9 +16,9 @@ public class RegistryController {
 
     @RequestMapping(value = "/reg", method = RequestMethod.POST)
     public String submit(Model model, @RequestParam String username,
-                         @RequestParam String password) {
+                         @RequestParam String password, @RequestParam String email) {
         if (username != null && password != null) {
-            if (new ManageUser().registry(username, password)) {
+            if (new ManageUser().registry(username, password, email)) {
                 model.addAttribute("msg", false);
                 return "success";
             } else {
