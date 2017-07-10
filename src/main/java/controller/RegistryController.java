@@ -19,14 +19,14 @@ public class RegistryController {
                          @RequestParam String password) {
         if (username != null && password != null) {
             if (new ManageUser().registry(username, password)) {
-                model.addAttribute("msg", "welcome" + username);
+                model.addAttribute("msg", false);
                 return "success";
             } else {
-                model.addAttribute("error", "There's an user with such username!");
+                model.addAttribute("msg", true);
                 return "registry";
             }
         } else {
-            model.addAttribute("error", "Please enter Details");
+            model.addAttribute("msg", true);
             return "registry";
         }
     }
